@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.io.FileWriter;
 import java.io.IOException;
+//import java.io.FileReader;
 
 public class Stack {
     private int size = 5;
