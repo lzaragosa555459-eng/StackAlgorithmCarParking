@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -6,21 +7,33 @@ public class Main {
         Stack s = new Stack();
 
         loop: while (true) {
-            System.out.println("--Menu--\n1]Add Car\n2]Pop Car\n3]Peek\n4]Display\n5]Exit\n\nChoose methods>>");
+            System.out.println("--Menu--\n1]Add Car\n2]Pop Car\n3]Peek\n4]Display\n5]Exit\n\nChoose>>");
             int choose = sc.nextInt();
 
             switch (choose) {
                 case 1:
+                    try{
                     System.out.println("Enter car plate");
                     int plate = sc.nextInt();
                     System.out.println("Enter Owner name");
                     String name = sc.next();
                     s.push(plate, name);
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid input! You input a special key.");
+                        sc.nextLine();
+                        break;
+                    }
                     break;
                 case 2:
+                    try{
                     System.out.println("What car to move? Input index 1-" + (s.gettop() + 1));
                     int chooseCar = sc.nextInt();
                     s.pop(chooseCar - 1);
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid input! You input a special key.");
+                        sc.nextLine();
+                        break;
+                    }
                     break;
                 case 3:
                     s.peek();
@@ -29,7 +42,7 @@ public class Main {
                     s.display();
                     break;
                 case 5:
-                    System.out.println("Exit");
+                    System.out.println("Exit Program...");
                     break loop;
                 default:
                     System.out.println("Invalid. Try again.");
