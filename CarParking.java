@@ -28,10 +28,13 @@ public class CarParking {
             stack[top][1] = name;
             System.out.println("Plate: " + car + "\nName: " + name);
             save(car, name);
+            logAction("Parked", car, name);
         }
     }
 
     public void pop(int moveCar) {
+        Object PlateNumber = stack[moveCar][0];
+        Object OwnerName = stack[moveCar][1];
 		if(isEmpty()) {
 			System.out.println("Empty Cars! Nothing to pop.");
 		} else {
@@ -40,8 +43,13 @@ public class CarParking {
 			for(int i=0;i<stack.length;i++) {
 				if(i != moveCar) {
 					temp[index++]=stack[i];
+                    if((stack[index][0] != null) && (index > moveCar)){
+                     logAction("Moved", Integer.parseInt(stack[index][0].toString()), stack[index][1].toString());
+                     continue;
+                    }
 				}
 			}
+            
 			top--;
 			
 			for(int i=0;i<stack.length;i++) {
@@ -50,8 +58,9 @@ public class CarParking {
 					stack[i][j] = temp[i][j];
 				}
 			}
-			System.out.println("Car Poppped Successfully!");
+            System.out.println("Car Popped successfully!");
 			update();
+            logAction("Exit", Integer.parseInt(PlateNumber.toString()), OwnerName.toString());
 		}
 	}
 
@@ -62,6 +71,7 @@ public class CarParking {
             System.out.println("Plate Number: " + stack[top][0]);
             System.out.println("Owner Name: " + stack[top][1]);
         }
+        System.out.println();
     }
 
     public void display() {
@@ -81,7 +91,7 @@ public class CarParking {
     }
 
     private void save(int carPlate, String ownerName) {
-        String fileName = "parking_log.csv";
+        String fileName = "CarStorage.csv";
         try (FileWriter writer = new FileWriter(fileName, true)) {
 
             writer.write(carPlate + "," + ownerName + "\n");
@@ -91,7 +101,7 @@ public class CarParking {
     }
 
     public void load(){
-        try(BufferedReader reader = new BufferedReader(new FileReader("parking_log.csv"))){
+        try(BufferedReader reader = new BufferedReader(new FileReader("CarStorage.csv"))){
         
             String line;
 
@@ -102,14 +112,14 @@ public class CarParking {
             stack[top][1] = values[1];
                 
             }
-            
+            reader.close();
                 }catch(IOException e){
                     System.out.println("There is something wrong reading your file.");
                 }
     }
 
     public void update(){
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("parking_log.csv"))){
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("CarStorage.csv"))){
 
             for (int i = 0; i <= top; i++) {
                 writer.write(stack[i][0] + "," + stack[i][1] + "\n");
@@ -119,5 +129,22 @@ public class CarParking {
             System.out.println("Error! There is something wrong with updating the file.");
         }
     }
-}
 
+    public void totalCars(){
+        int sum = 0;
+
+        for(int i = 0; i <= top; i++){
+            ++sum;
+        }
+        System.out.println("Total Cars parked: "+sum);
+    }
+    private void logAction(String action, int carPlate, String ownerName) {
+        String fileName = "parking_log.csv";
+        try (FileWriter writer = new FileWriter(fileName, true)) {
+            writer.write(action + " - " + carPlate + "," + ownerName + "\n");
+            writer.write("-----------------------\n");
+        } catch (IOException e) {
+            System.err.println("Error writing to log file: " + e.getMessage());
+        }
+    }
+}
