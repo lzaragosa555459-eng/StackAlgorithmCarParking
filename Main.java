@@ -11,7 +11,7 @@ public class Main {
 
         loop: while (true) {
            
-            System.out.println("--Main Menu--\n[1]Add Car\n[2]Pop Car\n[3]Peek\n[4]Display\n[5]Exit\n\n<?>Choose option<?>");
+            System.out.println("--Main Menu--\n[1]Park car\n[2]Exit Car\n[3]View top car & Total Cars\n[4]Display\n[5]Exit\n\n<?>Choose option<?>");
             int choose;
 
             try{
@@ -57,13 +57,16 @@ public class Main {
                 }
                     break;
                 case 3:
+                    System.out.println("\n-----Top Car-----------");
                     s.peek();
+                    System.out.println("-----Total Cars--------");
+                    s.totalCars();
                     break;
                 case 4:
                     s.display();
                     break;
                 case 5:
-                    System.out.println("Exit Car Parking Sims...");
+                    System.out.println("Exit Parking Lot Stack Simulator...");
                     break loop;
                 default:
                     System.out.println("Invalid Input. Enter numbers' 1 to 5 only.");
