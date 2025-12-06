@@ -12,12 +12,6 @@ public class CarParking {
     private int top = -1;
     private Object[][] temp = new Object[stack.length][stack[0].length];
 
-
-
-
-
-    
-
     public boolean isEmpty() {
         return top == -1;
     }
@@ -39,7 +33,7 @@ public class CarParking {
 
     public void pop(int moveCar) {
 		if(isEmpty()) {
-			System.out.println("Empty Cars! Nothing to move");
+			System.out.println("Empty Cars! Nothing to pop.");
 		} else {
 			int index = 0;
 			
@@ -71,7 +65,7 @@ public class CarParking {
 
     public void display() {
         if (isEmpty()) {
-            System.out.println("Car parking is empty");
+            System.out.println("Car parking is Empty! Nothing to display.");
         } else {
             System.out.println("--Car Parked for today--");
             for (int i = 0; i <= top; i++) {
@@ -108,10 +102,8 @@ public class CarParking {
                 
             }
             
-            
-
                 }catch(IOException e){
-                    System.out.println("There is something wrong reading your file");
+                    System.out.println("There is something wrong reading your file.");
                 }
     }
 
