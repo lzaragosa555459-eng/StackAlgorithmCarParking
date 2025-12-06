@@ -73,6 +73,14 @@ public class CarParking {
         }
         System.out.println();
     }
+    public void totalCars(){
+        int sum = 0;
+
+        for(int i = 0; i <= top; i++){
+            ++sum;
+        }
+        System.out.println("Total Cars parked: "+sum);
+    }
 
     public void display() {
         if (isEmpty()) {
@@ -90,7 +98,10 @@ public class CarParking {
         return top;
     }
 
-    private void save(int carPlate, String ownerName) {
+//////FILE HANDLING AREA ////////
+
+
+    private void save(int carPlate, String ownerName) { // SAVE TO CAR STORAGE
         String fileName = "CarStorage.csv";
         try (FileWriter writer = new FileWriter(fileName, true)) {
 
@@ -100,7 +111,7 @@ public class CarParking {
         }
     }
 
-    public void load(){
+    public void load(){// LOAD CURRENT VALUES INSIDE THE STACK ARRAY
         try(BufferedReader reader = new BufferedReader(new FileReader("CarStorage.csv"))){
         
             String line;
@@ -118,7 +129,7 @@ public class CarParking {
                 }
     }
 
-    public void update(){
+    public void update(){//UPDATE VALUES IN THE FILE CARSTORAGE WHEN DELETING OR POPPING A VALUE
         try(BufferedWriter writer = new BufferedWriter(new FileWriter("CarStorage.csv"))){
 
             for (int i = 0; i <= top; i++) {
@@ -130,15 +141,8 @@ public class CarParking {
         }
     }
 
-    public void totalCars(){
-        int sum = 0;
-
-        for(int i = 0; i <= top; i++){
-            ++sum;
-        }
-        System.out.println("Total Cars parked: "+sum);
-    }
-    private void logAction(String action, int carPlate, String ownerName) {
+    
+    private void logAction(String action, int carPlate, String ownerName) {//TRACKS THE MOVEMENTS OR LOGS OF EVERY CAR PARKED
         String fileName = "parking_log.csv";
         try (FileWriter writer = new FileWriter(fileName, true)) {
             writer.write(action + " - " + carPlate + "," + ownerName + "\n");
