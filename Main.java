@@ -11,7 +11,7 @@ public class Main {
 
         loop: while (true) {
            
-            System.out.println("--Menu--\n1]Add Car\n2]Pop Car\n3]Peek\n4]Display\n5]Exit\n\nChoose>>");
+            System.out.println("--Main Menu--\n[1]Add Car\n[2]Pop Car\n[3]Peek\n[4]Display\n[5]Exit\n\n<?>Choose option<?>");
             int choose;
 
             try{
@@ -23,9 +23,11 @@ public class Main {
         }
 
 
-
             switch (choose) {
                 case 1:
+                    if(s.isFull()){
+                        System.out.println("The Car Parking is already Full! Nothing to add here...");
+                    } else {
                     try{
                     System.out.println("Enter car plate");
                     int plate = sc.nextInt();
@@ -33,21 +35,26 @@ public class Main {
                     String name = sc.next();
                     s.push(plate, name);
                     } catch (InputMismatchException e) {
-                        System.out.println("Invalid input! You input a special key.");
+                        System.out.println("Invalid input! Enter number only.");
                         sc.nextLine();
                         break;
                     }
+                }
                     break;
                 case 2:
+                    if(s.isEmpty()){
+                        System.out.println("Car Parking is Empty! nothing to pop.");
+                    } else {
                     try{
                     System.out.println("What car to move? Input index 1-" + (s.gettop() + 1));
                     int chooseCar = sc.nextInt();
                     s.pop(chooseCar - 1);
                     } catch (InputMismatchException e) {
-                        System.out.println("Invalid input! You input a special key.");
+                        System.out.println("Invalid input! Enter number only.");
                         sc.nextLine();
                         break;
                     }
+                }
                     break;
                 case 3:
                     s.peek();
@@ -56,15 +63,13 @@ public class Main {
                     s.display();
                     break;
                 case 5:
-                    System.out.println("Exit Program...");
+                    System.out.println("Exit Car Parking Sims...");
                     break loop;
                 default:
                     System.out.println("Invalid Input. Enter numbers' 1 to 5 only.");
                     break;
               
             }
-        
-        
         }
         sc.close();
     }
