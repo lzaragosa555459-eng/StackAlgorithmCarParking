@@ -50,6 +50,7 @@ public class CarParking {
 					stack[i][j] = temp[i][j];
 				}
 			}
+			System.out.println("Car Poppped Successfully!");
 			update();
 		}
 	}
@@ -119,3 +120,4 @@ public class CarParking {
         }
     }
 }
+
