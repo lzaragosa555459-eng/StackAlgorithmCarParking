@@ -43,10 +43,7 @@ public class CarParking {
 			for(int i=0;i<stack.length;i++) {
 				if(i != moveCar) {
 					temp[index++]=stack[i];
-                    if((stack[index][0] != null) && (index > moveCar)){
-                     logAction("Moved", Integer.parseInt(stack[index][0].toString()), stack[index][1].toString());
-                     continue;
-                    }
+                    
 				}
 			}
             
@@ -58,9 +55,19 @@ public class CarParking {
 					stack[i][j] = temp[i][j];
 				}
 			}
+            for(int i = moveCar, j = top; j >= i; j--){
+                  logAction("Moved to temporary array", Integer.parseInt(stack[j][0].toString()), stack[j][1].toString());
+            }
+            
             System.out.println("Car Popped successfully!");
 			update();
             logAction("Exit", Integer.parseInt(PlateNumber.toString()), OwnerName.toString());
+
+            for(int i = moveCar, j = top; i <= j; i++){
+                     logAction("Returned to the main array", Integer.parseInt(stack[i][0].toString()), stack[i][1].toString());
+            }
+            newLineFormat();
+
 		}
 	}
 
@@ -146,7 +153,20 @@ public class CarParking {
         String fileName = "parking_log.csv";
         try (FileWriter writer = new FileWriter(fileName, true)) {
             writer.write(action + " - " + carPlate + "," + ownerName + "\n");
-            writer.write("-----------------------\n");
+            writer.write("----------------------------------------\n");
+        } catch (IOException e) {
+            System.err.println("Error writing to log file: " + e.getMessage());
+        }
+    }
+
+
+    //FOR FORMATTING ONLY
+    public void newLineFormat(){
+         String fileName = "parking_log.csv";
+        try (FileWriter writer = new FileWriter(fileName, true)) {
+          
+            writer.write("\n");
+             writer.write("\n");
         } catch (IOException e) {
             System.err.println("Error writing to log file: " + e.getMessage());
         }
