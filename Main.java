@@ -33,7 +33,12 @@ public class Main {
                     int plate = sc.nextInt();
                     System.out.println("Enter Owner name");
                     String name = sc.next();
+                    if (name.matches(".*\\d.*")) {
+                        System.out.println("Invalid name. Numbers are not allowed.");
+                        break; 
+                    }else {
                     s.push(plate, name);
+                    }
                     } catch (InputMismatchException e) {
                         System.out.println("Invalid input! Enter number only.");
                         sc.nextLine();
@@ -77,3 +82,4 @@ public class Main {
         sc.close();
     }
 }
+
