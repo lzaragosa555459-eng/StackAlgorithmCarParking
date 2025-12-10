@@ -56,7 +56,7 @@ public class CarParking {
 				}
 			}
             for(int i = moveCar, j = top; j >= i; j--){
-                  logAction("Moved to temporary array", Integer.parseInt(stack[j][0].toString()), stack[j][1].toString());
+                  logAction("Moved to temporary stack", Integer.parseInt(stack[j][0].toString()), stack[j][1].toString());
             }
             
             System.out.println("Car Popped successfully!");
@@ -64,7 +64,7 @@ public class CarParking {
             logAction("Exit", Integer.parseInt(PlateNumber.toString()), OwnerName.toString());
 
             for(int i = moveCar, j = top; i <= j; i++){
-                     logAction("Returned to the main array", Integer.parseInt(stack[i][0].toString()), stack[i][1].toString());
+                     logAction("Returned to the main stack", Integer.parseInt(stack[i][0].toString()), stack[i][1].toString());
             }
             newLineFormat();
 
@@ -172,3 +172,4 @@ public class CarParking {
         }
     }
 }
+
